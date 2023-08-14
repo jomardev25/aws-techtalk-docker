@@ -1,0 +1,40 @@
+
+.feature .titlepage p {
+    padding-top: 20px;
+    font-size: 17px;
+    line-height: 28px;
+    color: #2d2d2d;
+}
+
+.feature-post {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 60px;
+    align-items: center;
+}
+
+.feature-post-img, feature-post-details {
+    width: 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.feature-post-img{
+    margin-right: 60px;
+}
+
+.feature-post-img img {
+    position: relative;
+    z-index: 9999;
+    box-shadow: 2px 0 62px rgba(13, 3, 3, 0.10);
+}
+
+.feature-post-details {
+    margin-left: 60px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.feature-post-details .read-more {
+    margin-top: 35px;
+}

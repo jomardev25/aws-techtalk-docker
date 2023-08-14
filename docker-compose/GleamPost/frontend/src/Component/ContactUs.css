@@ -1,0 +1,60 @@
+.contact-us-container {
+    padding-top: 74px;
+}
+
+.contact-us-container .titlepage{
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.contact-us-container .form-control{
+    padding: 0 25px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 66px;
+    background: #ffffff;
+    color: #1f1d14;
+    font-size: 15px;
+    font-weight: normal;
+    border: inherit;
+    box-shadow: 2px 0 62px rgba(13, 3, 3, 0.04);
+}
+
+.contact-us-container .textarea {
+    margin-bottom: 40px;
+    width: 100%;
+    background: #ffffff;
+    color: #1f1d14 !important;
+    font-size: 15px;
+    font-weight: normal;
+    padding: 15px 25px 15px 25px;
+    border: inherit;
+    height: 146px;
+    box-shadow: 2px 0 62px rgba(13, 3, 3, 0.04);
+}
+
+.contact-us-container .btn-send{
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: ease-in all 0.5s;
+    background-color: #363636;
+    text-transform: uppercase;
+    color: #fff;
+    max-width: 276px;
+    width: 100%;
+    display: block;
+    font-weight: bold;
+    height: 78px;
+    line-height: 78px;
+    margin: 0 auto;
+    border: 0;
+}
+
+.contact-us-container .btn-send:hover {
+    outline: none;
+    background-color: #39b54a;
+    transition: ease-in all 0.5s;
+    color: #fff;
+    border: 0;
+}

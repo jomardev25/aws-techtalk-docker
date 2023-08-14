@@ -1,0 +1,80 @@
+# DOCKERCOMPOSE
+# BACKEND
+docker-compose/GleamPost/backend/HELP.md
+docker-compose/GleamPost/backend/target/
+docker-compose/GleamPost/backend/!.mvn/wrapper/maven-wrapper.jar
+docker-compose/GleamPost/backend/!**/src/main/**/target/
+docker-compose/GleamPost/backend/!**/src/test/**/target/
+
+### STS ###
+docker-compose/GleamPost/backend/.apt_generated
+docker-compose/GleamPost/backend/.classpath
+docker-compose/GleamPost/backend/.factorypath
+docker-compose/GleamPost/backend/.project
+docker-compose/GleamPost/backend/.settings
+docker-compose/GleamPost/backend/.springBeans
+docker-compose/GleamPost/backend/.sts4-cache
+
+### IntelliJ IDEA ###
+docker-compose/GleamPost/backend/.idea
+docker-compose/GleamPost/backend/*.iws
+docker-compose/GleamPost/backend/*.iml
+docker-compose/GleamPost/backend/*.ipr
+
+### NetBeans ###
+docker-compose/GleamPost/backend/nbproject/private/
+docker-compose/GleamPost/backend/nbbuild/
+docker-compose/GleamPost/backend/dist/
+docker-compose/GleamPost/backend/nbdist/
+docker-compose/GleamPost/backend/.nb-gradle/
+docker-compose/GleamPost/backendbuild/
+docker-compose/GleamPost/backend/!**/src/main/**/build/
+docker-compose/GleamPost/backend/!**/src/test/**/build/
+
+### VS Code ###
+docker-compose/GleamPost/backend/.vscode/
+
+
+# FRONTEND
+docker-compose/GleamPost/frontend/node_modules
+docker-compose/GleamPost/frontend/.pnp
+docker-compose/GleamPost/frontend/.pnp.js
+
+# testing
+docker-compose/GleamPost/frontend/coverage
+
+# production
+docker-compose/GleamPost/frontend/build
+
+# misc
+docker-compose/GleamPost/frontend/.DS_Store
+docker-compose/GleamPost/frontend/.env.local
+docker-compose/GleamPost/frontend/.env.development.local
+docker-compose/GleamPost/frontend/.env.test.local
+docker-compose/GleamPost/frontend/.env.production.local
+
+docker-compose/GleamPost/frontend/npm-debug.log*
+docker-compose/GleamPost/frontend/yarn-debug.log*
+docker-compose/GleamPost/frontend/yarn-error.log*
+
+# DOCKERFILE
+dockerfile/nodejs-api/node_modules
+dockerfile/nodejs-api/.pnp
+dockerfile/nodejs-api/.pnp.js
+
+# testing
+dockerfile/nodejs-api/coverage
+
+# production
+dockerfile/nodejs-api/build
+
+# misc
+dockerfile/nodejs-api/.DS_Store
+dockerfile/nodejs-api/.env.local
+dockerfile/nodejs-api/.env.development.local
+dockerfile/nodejs-api/.env.test.local
+dockerfile/nodejs-api/.env.production.local
+
+dockerfile/nodejs-api/npm-debug.log*
+dockerfile/nodejs-api/yarn-debug.log*
+dockerfile/nodejs-api/yarn-error.log*

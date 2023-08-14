@@ -1,0 +1,15 @@
+.slider-container {
+    background: #fff;
+    padding: 0 45px 45px 45px;
+    box-shadow: 3px 0 62px rgba(13, 3, 3, 0.10);
+    margin-bottom: 52px;
+}
+
+.main-slider {
+    padding: 80px 0;
+    padding-top: 10%;
+    height: 55vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
