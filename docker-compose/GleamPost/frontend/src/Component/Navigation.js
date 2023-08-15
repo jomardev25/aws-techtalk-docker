@@ -24,7 +24,7 @@ const Navigation = () => {
               <Link to="/contact-us">Contact Us</Link>
             </li>
             <li>
-              <Link to="/sign-up">Register</Link>
+              <Link to="/register">Register</Link>
             </li>
             <li>
               <Link to="/login">Login</Link>

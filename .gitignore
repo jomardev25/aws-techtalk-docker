@@ -1,4 +1,4 @@
-# DOCKERCOMPOSE
+# DOCKERCOMPOSE GLEAMPOST
 # BACKEND
 docker-compose/GleamPost/backend/HELP.md
 docker-compose/GleamPost/backend/target/
@@ -34,7 +34,6 @@ docker-compose/GleamPost/backend/!**/src/test/**/build/
 ### VS Code ###
 docker-compose/GleamPost/backend/.vscode/
 
-
 # FRONTEND
 docker-compose/GleamPost/frontend/node_modules
 docker-compose/GleamPost/frontend/.pnp
@@ -56,6 +55,10 @@ docker-compose/GleamPost/frontend/.env.production.local
 docker-compose/GleamPost/frontend/npm-debug.log*
 docker-compose/GleamPost/frontend/yarn-debug.log*
 docker-compose/GleamPost/frontend/yarn-error.log*
+
+# DOCKERCOMPOSE GLEAMPOST
+# BACKEND
+docker-compose/php-dev-env/vendor
 
 # DOCKERFILE
 dockerfile/nodejs-api/node_modules

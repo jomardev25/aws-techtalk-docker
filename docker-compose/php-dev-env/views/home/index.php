@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        
+        #table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #table td,
+        #table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #table tr:hover {
+            background-color: #ddd;
+        }
+
+        #table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        div#form {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 400px;
+            margin: 30px auto auto auto;
+        }
+
+        div#list {
+            width: 800px;
+            margin: 50px auto auto auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="form">
+            <form action="/" method="POST">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" placeholder="Enter Firstname">
+
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" placeholder="Enter Lastname">
+
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="Enter Firstname">
+
+                <label for="phone_num">Phone</label>
+                <input type="text" id="phone_num" name="phone_num" placeholder="Enter Lastname">
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div id="list">
+            <h2>Employee List</h2>
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($employees as $employee) : ?>
+                        <tr>
+                            <td><?php echo $employee->id; ?></td>
+                            <td><?php echo $employee->first_name; ?></td>
+                            <td><?php echo $employee->last_name; ?></td>
+                            <td><?php echo $employee->email; ?></td>
+                            <td><?php echo $employee->phone_num; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

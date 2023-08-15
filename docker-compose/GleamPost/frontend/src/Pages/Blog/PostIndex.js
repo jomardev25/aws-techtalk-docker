@@ -53,7 +53,7 @@ const BlogIndex = () => {
                 </thead>
                 <tbody>
                     {
-                        data.posts && data.posts.map(data =>
+                        data?.posts.map(data =>
                             <tr key={data.id}>
                                 <td>{data.id}</td>
                                 <td>{data.title}</td>

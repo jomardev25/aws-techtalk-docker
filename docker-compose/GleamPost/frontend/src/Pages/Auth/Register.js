@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../../Config";
 import "./login.css";
-import "./signup.css";
+import "./register.css";
 
-const SignUp = () => {
+const Register = () => {
   const [credentials, setCredentials] = useState({});
 
   const handleChange = (event) => {
@@ -43,74 +43,64 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signup-container">
-      <form method="POST" onSubmit={handleSubmit}>
+    <div className="register-container">
+      <div className="titlepage">
+        <h2>Sign Up</h2>
+      </div>
+      <form method="POST" onSubmit={handleSubmit} id="register-form" className="register-form">
         <div className="container">
-          <label htmlFor="first_name">
-            <b>First Name</b>
-          </label>
           <input
             type="text"
             placeholder="Enter First Name"
             name="first_name"
             id="first_name"
+            className="form-control"
             onChange={handleChange}
           />
 
-          <label htmlFor="last_name">
-            <b>Last Name</b>
-          </label>
           <input
             type="text"
             placeholder="Enter Last Name"
             name="last_name"
             id="last_name"
+            className="form-control"
             onChange={handleChange}
           />
-
-          <label htmlFor="email">
-            <b>Email</b>
-          </label>
           <input
             type="email"
             placeholder="Enter Email"
             name="email"
             id="email"
+            className="form-control"
             onChange={handleChange}
           />
 
-          <label htmlFor="username">
-            <b>Username</b>
-          </label>
           <input
             type="text"
             placeholder="Enter Username"
             name="username"
+            className="form-control"
             onChange={handleChange}
           />
 
-          <label htmlFor="password">
-            <b>Password</b>
-          </label>
           <input
             type="password"
             placeholder="Enter Password"
             name="password"
             id="password"
+            className="form-control"
             onChange={handleChange}
           />
 
-          <label htmlFor="password">
-            <b>Biography</b>
-          </label>
           <textarea
             id="bio"
             name="bio"
             onChange={handleChange}
             placeholder="Enter Biography"
+            className="textarea"
           ></textarea>
 
-          <label htmlFor="password">
+          <label htmlFor="image_url">
             <b>Profile</b>
           </label>
           <input
@@ -120,11 +110,11 @@ const SignUp = () => {
             onChange={handleChange}
           />
 
-          <button type="submit">Sign Up</button>
+          <button type="submit" className="btn-register">Sign Up</button>
         </div>
       </form>
     </div>
   );
 };
 
-export default SignUp;
+export default Register;
