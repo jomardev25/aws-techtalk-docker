@@ -111,15 +111,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($employees as $employee) : ?>
+                    {% for employee in employees %}
                         <tr>
-                            <td><?php echo $employee->id; ?></td>
-                            <td><?php echo $employee->first_name; ?></td>
-                            <td><?php echo $employee->last_name; ?></td>
-                            <td><?php echo $employee->email; ?></td>
-                            <td><?php echo $employee->phone_num; ?></td>
+                            <td>{{ employee.id }}</td>
+                            <td>{{ employee.first_name }}</td>
+                            <td>{{ employee.last_name }}</td>
+                            <td>{{ employee.email }}</td>
+                            <td>{{ employee.phone_num }}</td>
                         </tr>
-                    <?php endforeach; ?>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

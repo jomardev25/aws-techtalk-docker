@@ -23,5 +23,20 @@
     "name": "application.security.jwt.refresh-token.expiration",
     "type": "java.lang.String",
     "description": "A description for 'application.security.jwt.refresh-token.expiration'"
+  },
+  {
+    "name": "application.file.upload-dir.articles",
+    "type": "java.lang.String",
+    "description": "A description for 'application.file.upload-dir.articles'"
+  },
+  {
+    "name": "application.file.upload-dir.profiles",
+    "type": "java.lang.String",
+    "description": "A description for 'application.file.upload-dir.profiles'"
+  },
+  {
+    "name": "application.file.upload-root-dir",
+    "type": "java.lang.String",
+    "description": "A description for 'application.file.upload-root-dir'"
   }
 ]}

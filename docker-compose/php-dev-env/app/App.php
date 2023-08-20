@@ -6,11 +6,13 @@ namespace App;
 
 use Dotenv\Dotenv;
 use Twig\Environment;
+use App\Services\EmployeeService;
 use Illuminate\Events\Dispatcher;
 use Twig\Loader\FilesystemLoader;
-use Twig\Extra\Intl\IntlExtension;
 use Illuminate\Container\Container;
 use App\Exceptions\RouteNotFoundException;
+use App\Contracts\Services\EmployeeServiceInterface as ServicesEmployeeServiceInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class App
@@ -50,8 +52,9 @@ class App
             ]
         );
 
-        $twig->addExtension(new IntlExtension());
         $this->container->singleton(Environment::class, fn() => $twig);
+        $this->container->singleton(Request::class, fn() => Request::createFromGlobals());
+        $this->container->singleton(ServicesEmployeeServiceInterface::class, fn() => new EmployeeService());
        
         return $this;
     }

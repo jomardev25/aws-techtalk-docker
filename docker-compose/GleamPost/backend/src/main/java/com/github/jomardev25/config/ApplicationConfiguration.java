@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jomardev25.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,11 @@ public class ApplicationConfiguration {
 	@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public ObjectMapper getObjectMapper() {
+        return new ObjectMapper();
     }
 
     @Bean

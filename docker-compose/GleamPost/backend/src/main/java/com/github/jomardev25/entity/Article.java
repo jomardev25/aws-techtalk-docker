@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Article implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(unique = true)

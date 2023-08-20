@@ -2,6 +2,8 @@
 
 declare(strict_types = 1);
 
+$conn = new PDO("mysql:host=db;dbname=docker_demo", 'root', 'root');
+
 use App\App;
 use App\Router;
 use App\Controllers\HomeController;

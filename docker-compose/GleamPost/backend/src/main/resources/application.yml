@@ -20,6 +20,12 @@ spring:
   output:
     ansi:
       enabled: always
+  servlet:
+    multipart:
+      enabled: "true"
+      max-request-size: 500KB
+      file-size-threshold: 2KB
+      max-file-size: 500KB
 
 logging:
   level:
@@ -35,4 +41,8 @@ application:
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # 7 days
-
+  file:
+    upload-root-dir: ./public/uploads
+    upload-dir: 
+      articles: ./public/uploads
+      profiles: ./public/uploads/profiles

@@ -10,6 +10,10 @@ services:
     working_dir: /var/www/
     volumes:
       - ../:/var/www
+    networks:
+      - php-dev-networks
+    depends_on:
+      - db
   nginx:
     image: nginx:1.19-alpine
     container_name: nginx
@@ -19,13 +23,26 @@ services:
     volumes:
       - ../:/var/www
       - ./nginx:/etc/nginx/conf.d
+    networks:
+      - php-dev-networks
+    depends_on:
+      - db
   db:
     container_name: db
     image: mysql:8.0
     volumes:
       - ./storage/mysql:/var/lib/mysql
+      - ./db/init.sql:/data/application/init.sql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=docker_demo
+      - MYSQL_PASSWORD=root
     ports:
       - "3306:3306"
+    networks:
+      - php-dev-networks
+    command: --init-file /data/application/init.sql
+networks:
+  php-dev-networks:
+    external: true

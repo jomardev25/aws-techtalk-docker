@@ -1,51 +1,57 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\View;
 use App\Attributes\Get;
 use App\Attributes\Post;
 use App\Attributes\Route;
 use App\Enums\HttpMethod;
-use App\Models\Employee;
-use App\View;
+use Twig\Environment as Twig;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Contracts\Services\EmployeeServiceInterface as ServicesEmployeeServiceInterface;
 
 class HomeController
 {
+
+    public function __construct(
+        private Twig $twig,
+        private Request $request,
+        private ServicesEmployeeServiceInterface $employeeService
+    )
+    {
+    }
+
     #[Get('/')]
     #[Route('/home', HttpMethod::Head)]
-    public function index(): View
+    public function index(): string
     {
-        $employees = Employee::all();
-        return View::make('home/index', ['employees' => $employees]);
+        $employees = $this->employeeService->getAllEmployees();
+        return $this->twig->render('home/index.twig', ['employees' => $employees]);
     }
 
     #[Post('/')]
-    public function store(): void
+    public function store(): RedirectResponse
     {
-        Employee::create([
-            'first_name' => $_POST['first_name'],
-            'last_name' => $_POST['last_name'],
-            'email' => $_POST['email'],
-            'phone_num' => $_POST['phone_num']
-        ]);
 
-        header('Location: /');
+        $this->employeeService->createEmployee($this->request);
+        return new RedirectResponse('/');
     }
 
     #[Get('/about')]
     #[Route('/about', HttpMethod::Head)]
-    public function test(): View
+    public function about(): string
     {
-        return View::make('home/about');
+        return $this->twig->render('home/about.twig');
     }
 
     #[Get('/contact-us')]
     #[Route('/contact-us', HttpMethod::Head)]
-    public function hello(): View
+    public function contactUs(): string
     {
-        return View::make('home/contactus');
+        return $this->twig->render('home/contactus.twig');
     }
-    
 }

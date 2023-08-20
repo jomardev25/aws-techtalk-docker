@@ -56,12 +56,14 @@ docker-compose/GleamPost/frontend/npm-debug.log*
 docker-compose/GleamPost/frontend/yarn-debug.log*
 docker-compose/GleamPost/frontend/yarn-error.log*
 
-# DOCKERCOMPOSE GLEAMPOST
-# BACKEND
+# PHP MVC
+docker-compose/php-dev-env/storage
 docker-compose/php-dev-env/vendor
+docker-compose/php-dev-env/docker/storage
 
 # DOCKERFILE
 dockerfile/nodejs-api/node_modules
+dockerfile/nodejs-api/uploads
 dockerfile/nodejs-api/.pnp
 dockerfile/nodejs-api/.pnp.js
 
