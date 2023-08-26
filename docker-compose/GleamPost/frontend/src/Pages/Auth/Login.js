@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../Config";
 import "./login.css";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const newValue = event.target.value;
@@ -18,15 +20,18 @@ const Login = () => {
 
   const login = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/auth/login`, {
+      const response = await fetch(`${BASE_URL}/api/v1/auth/login`, {
         method: "POST",
         body: JSON.stringify(credentials),
         headers: { "Content-Type": "application/json" },
       });
       const jsonData = await response.json();
-      localStorage.setItem("token", jsonData.access_token);
-      if (jsonData.access_token) window.location.href = "/admin/users";
-      else alert(jsonData.message);
+      if (jsonData.access_token) {
+        localStorage.setItem("token", jsonData.access_token);
+        navigate("/admin/articles");
+      } else {
+        alert(jsonData.message);
+      }
     } catch (error) {
       console.error(error);
     }

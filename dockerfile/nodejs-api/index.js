@@ -1,23 +1,27 @@
 const express = require("express");
-var fs = require("fs");
+const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const multer = require("multer");
 const app = express();
 const port = 8080;
 
-const DIR = process.env.UPLOAD_PATH; // ENV -> UPLOAD_PATH=/uploads
+const UPLOAD_PATH = process.env.UPLOAD_PATH || "/uploads"; // ENV -> UPLOAD_PATH=uploads
 
 let storage = multer.diskStorage({
     destination: (req, res, cb) => {
-        cb(null, `.${DIR}`);
+        cb(null, `.${UPLOAD_PATH}`);
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
+        cb(null, file.originalname + "_" + Date.now() + path.extname(file.originalname));
     } 
 });
 
 let upload = multer({ storage });
+
+app.get("/", (req, res) =>{
+    res.send('<h1>NodeJS Upload Image API</h1>');
+});
 
 app.post("/upload", upload.single("photo"), (req, res) =>{
     if(!req.file){
@@ -36,22 +40,22 @@ app.post("/upload", upload.single("photo"), (req, res) =>{
 });
 
 app.get("/upload/:file", (req, res) =>{
-    res.sendFile(`${__dirname}/${DIR}/${req.params.file}`);
+    res.sendFile(`${__dirname}${UPLOAD_PATH}/${req.params.file}`);
 });
 
-app.get("/", (req, res) =>{
+app.get("/hostname", (req, res) =>{
     res.json({
         hostname: os.hostname(),
-        message: "Hot reloading with nodemon in docker compose!!!",
         success: true
     })
 });
 
-app.get("/hello-docker", (req, res) =>{
-    res.json({
-        message: "Hello Docker",
-        success: true
-    })
+app.get("/version", (req, res) =>{
+    res.json({ message: "V2" })
+});
+
+app.get("/kill", (req, res) =>{
+    process.exit (1);
 });
 
 app.listen(port, () => {

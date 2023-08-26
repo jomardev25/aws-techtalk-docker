@@ -6,6 +6,10 @@
     color: #2d2d2d;
 }
 
+.feature .titlepage{
+    text-align: left;
+}
+
 .feature-post {
     display: flex;
     flex-direction: row;
@@ -13,7 +17,7 @@
     align-items: center;
 }
 
-.feature-post-img, feature-post-details {
+.feature-post-img, .feature-post-details {
     width: 50%;
     padding-right: 15px;
     padding-left: 15px;

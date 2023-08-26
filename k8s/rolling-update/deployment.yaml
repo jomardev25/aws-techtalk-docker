@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-api
+  namespace: default
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # Max number of Pods that can be unavailable during the update process
+      maxUnavailable: 1 #25%
+      # Max number of Pods that can be created over the desired number of Pods
+      maxSurge: 1 #25%
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nodejs-api
+  template:
+    metadata:
+      labels:
+        app: nodejs-api
+    spec:
+      containers:
+        - name: nodejs-api
+          image: jomardev25/nodejs-api:2.0.0
+          env:
+            - name: UPLOAD_PATH
+              value: /uploads
+          ports:
+            - name: http
+              containerPort: 8080
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 5

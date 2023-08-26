@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-nodejs-api
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodejs-api
+      replica: blue
+  template:
+    metadata:
+      labels:
+        app: nodejs-api
+        replica: blue
+    spec:
+      containers:
+        - name: nodejs-api
+          image: jomardev25/nodejs-api:1.0.0
+          ports:
+            - name: http
+              containerPort: 8080
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 5

@@ -37,21 +37,92 @@ main{
 }
 
 .btn{
-  font-size: 16px;
-  background: #212121;
-  max-width: 233px;
-  width: 100%;
+  outline: none;
+  cursor: pointer;
+  font-size: 18px;
   transition: ease-in all 0.5s;
-  color: #fff;
-  display: block;
-  height: 70px;
-  line-height: 70px;
-  text-align: center;
+  background-color: #363636;
   text-transform: uppercase;
+  color: #fff;
+  max-width: 276px;
+  width: 100%;
+  display: block;
   font-weight: bold;
+  height: 78px;
+  line-height: 78px;
+  border: 0;
+  text-align: center;
 }
 
 .btn:hover {
-  background: #39b54a;
+  outline: none;
+  background-color: #39b54a;
+  transition: ease-in all 0.5s;
   color: #fff;
+  border: 0;
+}
+
+table{
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-style: normal;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #39b54a;
+  color: white;
+}
+
+.blog-add-button-container{
+  display: flex ;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.form-control{
+  padding: 0 25px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 66px;
+  background: #ffffff;
+  color: #1f1d14;
+  font-size: 15px;
+  font-weight: normal;
+  border: inherit;
+  box-shadow: 2px 0 62px rgba(13, 3, 3, 0.04);
+}
+
+.textarea {
+  margin-bottom: 40px;
+  width: 100%;
+  background: #ffffff;
+  color: #1f1d14 !important;
+  font-size: 15px;
+  font-weight: normal;
+  padding: 15px 25px 15px 25px;
+  border: inherit;
+  height: 146px;
+  box-shadow: 2px 0 62px rgba(13, 3, 3, 0.04);
+}
+
+.titlepage{
+  text-align: center;
+  margin-top: 40px;
+  padding-bottom: 40px;
 }

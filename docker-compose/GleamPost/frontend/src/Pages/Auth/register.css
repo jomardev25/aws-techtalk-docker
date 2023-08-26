@@ -3,38 +3,6 @@
     margin: 0 auto;
 }
 
-.register-container .titlepage{
-    text-align: center;
-    margin-top: 40px;
-    padding-bottom: 40px;
-}
-
-.register-container .form-control{
-    padding: 0 25px;
-    margin-bottom: 20px;
-    width: 100%;
-    height: 66px;
-    background: #ffffff;
-    color: #1f1d14;
-    font-size: 15px;
-    font-weight: normal;
-    border: inherit;
-    box-shadow: 2px 0 62px rgba(13, 3, 3, 0.04);
-}
-
-.register-container .textarea {
-    margin-bottom: 40px;
-    width: 100%;
-    background: #ffffff;
-    color: #1f1d14 !important;
-    font-size: 15px;
-    font-weight: normal;
-    padding: 15px 25px 15px 25px;
-    border: inherit;
-    height: 146px;
-    box-shadow: 2px 0 62px rgba(13, 3, 3, 0.04);
-}
-
 .register-container .btn-register{
     outline: none;
     cursor: pointer;

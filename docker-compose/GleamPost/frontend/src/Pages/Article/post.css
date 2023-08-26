@@ -63,39 +63,6 @@ button:hover {
     opacity: 0.8;
 }
 
-table{
-    width: 100%;
-}
-
-td,
-th {
-    border: 1px solid #ddd;
-    padding: 8px;
-    font-style: normal;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:hover {
-    background-color: #ddd;
-}
-
-th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #04AA6D;
-    color: white;
-}
-
-.blog-add-button-container{
-    display: flex ;
-    justify-content: flex-end;
-    margin-bottom: 15px;
-}
-
 .blog-add-button-container .button{
     width: 100px;
     text-decoration: none;

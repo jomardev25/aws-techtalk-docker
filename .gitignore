@@ -1,5 +1,6 @@
 # DOCKERCOMPOSE GLEAMPOST
 # BACKEND
+docker-compose/GleamPost/backend/public
 docker-compose/GleamPost/backend/HELP.md
 docker-compose/GleamPost/backend/target/
 docker-compose/GleamPost/backend/!.mvn/wrapper/maven-wrapper.jar

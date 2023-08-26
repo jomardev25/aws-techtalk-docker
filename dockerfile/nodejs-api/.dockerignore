@@ -1,7 +1,9 @@
-# Ignore a file or directory in the context root named "uploads"
+# Ignore a file or directory in the context root named
+./conf.d
 ./node_modules
 ./uploads
 .dockerignore
+npm-debug.log
 docker-compose.yml
 Dockerfile
 Dev.Dockerfile

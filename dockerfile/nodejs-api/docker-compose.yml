@@ -3,20 +3,46 @@ services:
   api:
     build:
       context: .
+    deploy:
+      restart_policy:
+        condition: on-failure # none, on-failure, any
+        delay: 5s # How long to wait between restart attempts
+        max_attempts: 3 # How many times to attempt to restart a container before giving up (default: never give up)
+        window: 120s #H ow long to wait before deciding if a restart has succeeded
+      replicas: 2
+      resources:
+        limits:
+          # service is constrained to use no more than 50M of memory and 0.50 (50% of a single core) of available processing time (CPU)
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          # service has 20M of memory and 0.25 CPU time reserved (as always available to it)
+          cpus: '0.25'
+          memory: 20M
     environment:
-      - NODE_ENV=development
       - UPLOAD_PATH=/uploads
-      - UPLOADED_PATH=/usr/app/uploads
     volumes:
+      - type: bind
+        source: ./uploads
+        target: /usr/app/uploads
       - .:/usr/app
-      - ./uploads:/usr/app/uploads
       - /usr/app/node_modules
+      - /conf.d
+    networks:
+      - nodejs-api-networks
     command: npm run prod
-  nginx: 
-    image: nginx:1.19-alpine
+  nginx:
+    image: nginx:1.25.2
+    restart: always
     volumes:
       - ./conf.d:/etc/nginx/conf.d
     depends_on:
       - api
     ports:
-      - 8080:8080
+      - 8081:8080
+    networks:
+      - nodejs-api-networks
+
+networks:
+  nodejs-api-networks:
+    external: true

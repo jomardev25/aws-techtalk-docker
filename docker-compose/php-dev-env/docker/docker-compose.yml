@@ -15,7 +15,7 @@ services:
     depends_on:
       - db
   nginx:
-    image: nginx:1.19-alpine
+    image: nginx:1.25.2
     container_name: nginx
     restart: always
     ports:
@@ -39,7 +39,7 @@ services:
       - MYSQL_DATABASE=docker_demo
       - MYSQL_PASSWORD=root
     ports:
-      - "3306:3306"
+      - 3306
     networks:
       - php-dev-networks
     command: --init-file /data/application/init.sql

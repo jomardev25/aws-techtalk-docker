@@ -114,13 +114,13 @@ ul.menu-footer li a:hover {
     background-color: #39b54a;
     text-transform: uppercase;
     color: #fff;
+    cursor: pointer;
     display: block;
     font-weight: normal;
     line-height: 48px;
     height: 48px;
     max-width: 154px;
     width: 100%;
-    display: block;
 }
 
 .subscribe-btn:hover {

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @AutoConfigureAfter(DispatcherServletAutoConfiguration.class)
 public class ResourceWebConfiguration implements WebMvcConfigurer {
 
-  @Value("${application.file.upload-dir}")
+  @Value("${application.file.upload-root-dir}")
   private String dirName;
 
   @Override
@@ -25,6 +25,7 @@ public class ResourceWebConfiguration implements WebMvcConfigurer {
     if (dirName.startsWith("../"))
       dirName = dirName.replace("../", "");
 
+      System.out.println("UPLOAD_PATH: "  + uploadPath);
       registry.addResourceHandler("/uploads/**").addResourceLocations("file:/"+ uploadPath + "/");
   }
 }

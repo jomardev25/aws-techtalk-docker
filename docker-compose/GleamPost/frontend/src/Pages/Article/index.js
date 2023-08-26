@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Blog from "./Blog";
+import Blog from "./Article";
 import { BASE_URL } from "../../Config";
-import "./post.css";
+
 
 const Post = () => {
 

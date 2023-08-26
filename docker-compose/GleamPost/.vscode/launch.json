@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GleamPostApplication<gleam-post>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.github.jomardev25.GleamPostApplication",
+            "projectName": "gleam-post",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

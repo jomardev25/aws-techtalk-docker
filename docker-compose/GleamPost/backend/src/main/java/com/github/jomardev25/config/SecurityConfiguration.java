@@ -2,6 +2,7 @@ package com.github.jomardev25.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,28 +21,32 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    private final LogoutHandler logoutHandler;
-    private final JwtAuthenticationFilter jwtAuthFilter;
-    private final AuthenticationProvider authenticationProvider;
+        private final CorsConfig corsConfig;
+        private final LogoutHandler logoutHandler;
+        private final JwtAuthenticationFilter jwtAuthFilter;
+        private final AuthenticationProvider authenticationProvider;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/articles/**").permitAll()
-                        .requestMatchers("/**").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .authenticationProvider(authenticationProvider)
-                .logout(logout -> logout
-                        .logoutUrl("/api/v1/auth/logout")
-                        .addLogoutHandler(logoutHandler)
-                        .logoutSuccessHandler(
-                                (request, response, authentication) -> SecurityContextHolder.clearContext()));
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http.csrf(csrf -> csrf.disable())
+                        .cors(cors -> {
+                                cors.configurationSource(corsConfig);
+                        })
+                        .sessionManagement(session -> session
+                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        .authorizeHttpRequests((requests) -> requests
+                                .requestMatchers("/api/v1/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/articles/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/uploads/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/articles/**").authenticated()
+                                .anyRequest().authenticated())
+                        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                        .authenticationProvider(authenticationProvider)
+                        .logout(logout -> logout
+                                .logoutUrl("/api/v1/auth/logout")
+                                .addLogoutHandler(logoutHandler)
+                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext()));
 
-        return http.build();
-    }
+                return http.build();
+        }
 }

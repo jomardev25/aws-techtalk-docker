@@ -1,14 +1,32 @@
-import React from "react";
-import Footer from "../../Component/Footer.js";
+import React, { useEffect, useState } from "react";
+import { BASE_URL } from "../../Config";
 import Slider from "../../Component/Slider.js";
-import FeaturePost from "../../Component/FeaturePost.js";
+import FeaturedArticles from "../../Component/FeaturedArticles.js";
 import ContactUs from "../../Component/ContactUs.js";
 
 const Home = () => {
+
+    const [featuredArticles, setFeaturedArticles] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () =>{
+            try {
+                const response = await fetch(`${BASE_URL}/api/v1/articles/features`);
+                const jsonData = await response.json();
+                setFeaturedArticles(jsonData);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+
+    }, []);
+
     return (
         <>
             <Slider/>
-            <FeaturePost />
+            <FeaturedArticles featuredArticles={featuredArticles}/>
             <ContactUs />
         </>
     );

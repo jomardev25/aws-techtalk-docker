@@ -1,0 +1,16 @@
+.article-image-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.article-image {
+    align-self: center;
+    width: 50%;
+    height: 50%;
+}
+
+.article-form-submit-button {
+    display: flex;
+    justify-content: center;
+}

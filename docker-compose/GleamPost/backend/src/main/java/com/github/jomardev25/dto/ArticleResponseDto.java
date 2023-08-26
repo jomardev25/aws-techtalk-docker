@@ -1,6 +1,6 @@
 package com.github.jomardev25.dto;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,11 @@ public class ArticleResponseDto {
     private String slug;
     private String description;
     private String body;
+
+    @JsonProperty("image_url")
     private String imageUrl;
-    private LocalDateTime publishedAt;
+
+    @JsonProperty("published_at")
+    private String publishedAt;
     private AuthorResponseDto author;
 }

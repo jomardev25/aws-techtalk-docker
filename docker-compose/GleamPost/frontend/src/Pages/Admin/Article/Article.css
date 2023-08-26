@@ -1,0 +1,20 @@
+.article-container {
+    margin-top: 80px;
+}
+
+.article-action-button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.article-action-button a.btn{
+    width: 200px;
+}
+
+.article-container .article-table .article-table-action{
+    display: flex;
+    justify-content: space-between;
+    
+}

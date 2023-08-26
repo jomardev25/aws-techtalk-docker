@@ -3,16 +3,13 @@ FROM node:alpine
 
 # Define environment variable
 ARG WORK_SPACE=/usr/app
-ENV APP_NAME NodeJSAPI
+ENV UPLOAD_PATH=/uploads
 
 # Set the working directory to /usr/app
 WORKDIR $WORK_SPACE
 
-# Install nodemon globally
-RUN npm install --global nodemon
-
-# Create uploads folder inside /usr/app
-RUN mkdir uploads
+# Create upload folder inside /usr/app
+RUN mkdir .$UPLOAD_PATH
 
 # Copy package.json inside /usr/app
 COPY package.json .
@@ -20,14 +17,14 @@ COPY package.json .
 # Install any needed packages
 RUN npm install
 
+# Don't use root user
+# USER node
+
 # Copy the current directory contents into the container at /usr/app
 COPY . .
 
-# Don't use root user
-USER node
-
-# Make port 80 available to the world outside this container
+# Expose container port
 EXPOSE 8080
 
 # Run npm run start when the container launches
-CMD [ "npm", "run" "start" ]
+CMD [ "node", "index.js" ]

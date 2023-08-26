@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { BASE_URL } from "../../Config";
+import { BASE_URL } from "../../../Config";
 import "./post.css";
 
-const EditPost = () => {
+const CreateArticle = () => {
     const [data, setData] = useState({});
     const { id } = useParams();
     const navigate = useNavigate();
@@ -85,4 +85,4 @@ const EditPost = () => {
     );
 };
 
-export default EditPost;
+export default CreateArticle;

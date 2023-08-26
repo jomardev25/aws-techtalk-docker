@@ -17,7 +17,7 @@ public class AuthenticationRequestDto {
     @NotNull
     @NotEmpty
     @Email
-    private String email;
+    private String username;
 
     @NotNull
     @NotEmpty

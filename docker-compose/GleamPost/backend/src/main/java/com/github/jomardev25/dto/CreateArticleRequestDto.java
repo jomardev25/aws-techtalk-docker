@@ -30,10 +30,6 @@ public class CreateArticleRequestDto {
     @NotBlank
     private String body;
 
-    @NotNull
-    @NotBlank
-    private Long authorId;
-
     @Builder.Default
     private Set<String> tags = new HashSet<>();
 

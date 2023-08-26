@@ -22,13 +22,13 @@ import com.github.jomardev25.exception.FileNotFoundException;
 import com.github.jomardev25.exception.FileStorageException;
 import com.github.jomardev25.service.FileStorageService;
 
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Service
 public class FileStorageServiceImpl implements FileStorageService {
 
-  @Value("${application.file.upload-dir}")
+  @Value("${application.file.upload-root-dir}")
   private String uploadDir;
   private Path root;
 
@@ -58,9 +58,9 @@ public class FileStorageServiceImpl implements FileStorageService {
       }
 
       Path destinationFile = this.root.resolve(fileName).normalize().toAbsolutePath();
-      if (!destinationFile.getParent().equals(this.root.toAbsolutePath())) {
+      /* if (!destinationFile.getParent().equals(this.root.toAbsolutePath())) {
 				throw new FileStorageException("Cannot store file outside current directory.");
-			}
+			} */
 
       try (InputStream inputStream = file.getInputStream()) {
 				Files.copy(inputStream, destinationFile,StandardCopyOption.REPLACE_EXISTING);

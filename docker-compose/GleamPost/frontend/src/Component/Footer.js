@@ -28,7 +28,7 @@ const Footer = () => {
                 <li>
                   <img src={mail} alt="#" />
                   <span>
-                  <a href="Javascript:void(0)">email@local.com</a>
+                  <a href="!#">email@local.com</a>
                   </span>
                 </li>
               </ul>

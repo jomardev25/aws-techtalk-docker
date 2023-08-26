@@ -16,7 +16,6 @@ use App\Contracts\Services\EmployeeServiceInterface as ServicesEmployeeServiceIn
 
 class HomeController
 {
-
     public function __construct(
         private Twig $twig,
         private Request $request,

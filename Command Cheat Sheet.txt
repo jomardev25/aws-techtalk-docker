@@ -1,0 +1,96 @@
+https://containrrr.dev/watchtower/
+https://www.portainer.io/
+https://nginxproxymanager.com/
+
+
+cmd -new_console:s /k ""%ConEmuDir%\..\init.bat
+netstat -ano | findstr :9000
+
+docker run -d -p 8000:8000 -p 9443:9443 -p 9001:9000 --network nginx-portainer-networks --rm --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+
+docker run -d --rm --name nginx-proxy-manager -p 8181:8181 -p 8080:8080 -p 4443:4443 --network nginx-portainer-networks  -v /docker/appdata/nginx-proxy-manager:/config:rw jlesage/nginx-proxy-manager
+
+docker run --rm --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once
+
+#Rename an image
+docker tag OldName:tag NewName:tag
+
+#Push an imge to docker hub
+docker push <docker_hub_account>/<image_name>:tag
+
+#Run watch.sh in bash
+bash ./watch.sh
+
+#Build an imge
+docker build -t nodejs-api:1.0.0 .
+
+#Run an image without volume
+docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm --name nodejs-api jomardev25/nodejs-api:1.0.0
+
+#using --mount
+docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm  --name nodejs-api --mount src="$(pwd)/uploads",target=/usr/app/uploads,type=bind jomardev25/nodejs-api:1.0.0
+
+#Volumes
+docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm  --name nodejs-api -v "$(pwd)/uploads":/usr/app/uploads jomardev25/nodejs-api:1.0.0
+
+#anonymouse volume
+docker volume create
+
+docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --name nodejs-api -v /usr/app/uploaded jomardev25/nodejs-api:1.0.0
+# Docker host folder path
+/var/lib/docker/volumes/<hash>/_data
+
+#Named Volumes
+docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm --name nodejs-api -v nodejs-api-volume:/usr/app/uploaded jomardev25/nodejs-api:1.0.0
+# Docker host folder path
+/var/lib/docker/volumes/nodejs-api-volume/_data
+
+#Docker Volume Driver
+Amazon EBS, local
+local, NFS - linux, SMB - Windows
+
+CIFS (Common Internet File System) 
+
+#Docker Network
+Network Driver	bridge, host, ipvlan, macvlan, null, overlay
+
+#Run an image with volume
+#Using git
+docker run -v //$(pwd)/uploads:/usr/app/uploads -p 8080:8080 -e UPLOAD_PATH=/uploads --rm --name nodejs-api jomardev25/nodejs-api:1.0.0
+
+#Using CMD
+docker run -v %cd%/uploads:/usr/app/uploads -p 8080:8080 -e UPLOAD_PATH=/uploads --rm --name nodejs-api jomardev25/nodejs-api:1.0.0
+
+#Using Powershell
+docker run -v $pwd/uploads:/usr/app/uploads -p 8080:8080 -e UPLOAD_PATH=/uploads --rm --name nodejs-api jomardev25/nodejs-api:1.0.0
+
+# Access docker volumes folder
+\\wsl$\docker-desktop-data\mnt\wsl\docker-desktop-data\data\docker\volumes
+
+
+#Kubernetes
+kubectl describe node
+
+#Get endpoints
+kubectl get endpoints
+
+#Port Forwarding
+kubectl port-forward <POD>  8080:8080
+
+#Delete POD
+kubectl delete pod nodejs-api-7d8949cd46-4qp2n
+
+#Get status
+kubectl rollout status deployments
+
+#Mark the provided resource as paused
+kubectl rollout pause deployment/nodejs-api
+
+#Resume a paused resource
+kubectl rollout resume deployment/nodejs-api
+
+#Undo a previous rollout
+kubectl rollout undo deployment/nodejs-api
+
+
+mvn clean package

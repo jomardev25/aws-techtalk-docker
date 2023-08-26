@@ -1,10 +1,10 @@
 import React, { useEffect, useState  } from "react";
 import { useParams } from "react-router-dom";
-import Comment from "./Comment";
-import { BASE_URL } from "../../Config";
+import Comment from "../../Article/Comment";
+import { BASE_URL } from "../../../Config";
 import "./post.css";
 
-const Show = (props) => {
+const ShowArticle = (props) => {
 
     const [data, setData] = useState({});
     const { id } = useParams();
@@ -43,4 +43,4 @@ const Show = (props) => {
     );
 };
 
-export default Show;
+export default ShowArticle;

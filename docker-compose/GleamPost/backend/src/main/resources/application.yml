@@ -5,16 +5,16 @@ spring:
   application:
     name: GleamPost
   datasource:
-    url: jdbc:postgresql://localhost:5432/gleam_post
-    username: postgres
-    password:
+    url: 'jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_DATABASE}'
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
+        format-sql: "true"
   jackson:
     property-naming-strategy: SNAKE_CASE
   output:
@@ -23,9 +23,16 @@ spring:
   servlet:
     multipart:
       enabled: "true"
-      max-request-size: 500KB
+      max-request-size: 215MB
       file-size-threshold: 2KB
-      max-file-size: 500KB
+      max-file-size: 200MB
+  flyway:
+    baseline-on-migrate: "true"
+    enabled: "true"
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    baseline-description: "init"
+    baseline-version: 0
 
 logging:
   level:
@@ -42,7 +49,7 @@ application:
       refresh-token:
         expiration: 604800000 # 7 days
   file:
-    upload-root-dir: ./public/uploads
+    upload-root-dir: ${UPLOAD_PATH}
     upload-dir: 
       articles: ./public/uploads
       profiles: ./public/uploads/profiles
