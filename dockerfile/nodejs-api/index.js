@@ -6,9 +6,9 @@ const multer = require("multer");
 const app = express();
 const port = 8080;
 
-const UPLOAD_PATH = process.env.UPLOAD_PATH || "/uploads"; // ENV -> UPLOAD_PATH=uploads
+const UPLOAD_PATH = process.env.UPLOAD_PATH ?? "/uploads"; // ENV -> UPLOAD_PATH=/uploads
 
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: (req, res, cb) => {
         cb(null, `.${UPLOAD_PATH}`);
     },
@@ -17,7 +17,7 @@ let storage = multer.diskStorage({
     } 
 });
 
-let upload = multer({ storage });
+const upload = multer({ storage });
 
 app.get("/", (req, res) =>{
     res.send('<h1>NodeJS Upload Image API</h1>');

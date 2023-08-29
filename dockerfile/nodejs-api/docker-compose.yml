@@ -8,8 +8,8 @@ services:
         condition: on-failure # none, on-failure, any
         delay: 5s # How long to wait between restart attempts
         max_attempts: 3 # How many times to attempt to restart a container before giving up (default: never give up)
-        window: 120s #H ow long to wait before deciding if a restart has succeeded
-      replicas: 2
+        window: 120s # How long to wait before deciding if a restart has succeeded
+      replicas: 2 #  Number of containers to be run
       resources:
         limits:
           # service is constrained to use no more than 50M of memory and 0.50 (50% of a single core) of available processing time (CPU)
@@ -29,7 +29,7 @@ services:
       - /usr/app/node_modules
       - /conf.d
     networks:
-      - nodejs-api-networks
+      - networks
     command: npm run prod
   nginx:
     image: nginx:1.25.2
@@ -41,8 +41,9 @@ services:
     ports:
       - 8081:8080
     networks:
-      - nodejs-api-networks
+      - networks 
+  db: 
+    image: mysql:8
 
 networks:
-  nodejs-api-networks:
-    external: true
+  networks:

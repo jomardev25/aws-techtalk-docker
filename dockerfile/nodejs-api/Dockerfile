@@ -8,8 +8,8 @@ ENV UPLOAD_PATH=/uploads
 # Set the working directory to /usr/app
 WORKDIR $WORK_SPACE
 
-# Create upload folder inside /usr/app
-RUN mkdir .$UPLOAD_PATH
+# Create upload folder inside /usr/app -> /usr/app/uploads
+RUN mkdir .$UPLOAD_PATH 
 
 # Copy package.json inside /usr/app
 COPY package.json .
@@ -17,13 +17,10 @@ COPY package.json .
 # Install any needed packages
 RUN npm install
 
-# Don't use root user
-# USER node
-
 # Copy the current directory contents into the container at /usr/app
 COPY . .
 
-# Expose container port
+# Expose container port 8080
 EXPOSE 8080
 
 # Run npm run start when the container launches
