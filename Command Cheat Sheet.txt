@@ -18,6 +18,25 @@ https://www.suse.com/c/wp-content/uploads/2019/04/What-is-Master-Node-in-K8s_-10
 https://awsys-i.zoom.us/wc/86275232977/join?wpk=wcpk%7B0%7D%26%26%26%26wcpk35c45d6516ff6ac3e2e337430b493d45&_x_zm_rtaid=OV1PpDQFSOCMLEH7S_QmuA.1693278521549.ae8a51719ea1add8f3d94a949364b386&_x_zm_rhtaid=295
 
 
+
+https://spin.atomicobject.com/2019/07/11/docker-volumes-explained/
+https://k21academy.com/docker-kubernetes/docker-storage/
+
+Temporary File System
+tmpfs (short for Temporary File System) is a temporary file storage paradigm implemented in many Unix-like operating systems. It is intended to appear as a mounted file system, but data is stored in volatile memory instead of a persistent storage device.
+Very useful when it involves sensitive data that you simply don’t want to be permanent
+
+docker run -it -v /var/lib/docker:/var/lib/docker nodejs-api bash
+ls var/lib/docker/containers
+
+tmpfs Mounts
+docker run -d --name tmptest --mount type=tmpfs,destination=/app nginx:latest
+docker run -d --name tmptest --tmpfs /app nginx:latest
+
+docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm  --name nodejs-api --mount type=tmpfs,target='',destination=/app jomardev25/nodejs-api:1.0.0
+docker inspect nodejs-api --format '{{ json .Mounts }}'
+
+
 cmd -new_console:s /k ""%ConEmuDir%\..\init.bat
 netstat -ano | findstr :9000
 
@@ -26,7 +45,6 @@ docker create --name nginx2 nginx:1.25.2
 docker start nginx2
 
 echo "<html><body><h1>Hello World</h1></body></html>" >> index.html
-
 
 docker run -d -p 8000:8000 -p 9443:9443 -p 9001:9000 --network nginx-portainer-networks --rm --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 
@@ -55,15 +73,15 @@ docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm  --name nodejs-api --mount 
 #Volumes
 docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm  --name nodejs-api -v "$(pwd)/uploads":/usr/app/uploads jomardev25/nodejs-api:1.0.0
 
-#anonymouse volume
+#Anonymous Volume
 docker volume create
 
 docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --name nodejs-api -v /usr/app/uploaded jomardev25/nodejs-api:1.0.0
 # Docker host folder path
 /var/lib/docker/volumes/<hash>/_data
 
-#Named Volumes
-docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm --name nodejs-api -v nodejs-api-volume:/usr/app/uploaded jomardev25/nodejs-api:1.0.0
+#Named Volume
+docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm --name nodejs-api -v nodejs-api-volume:/usr/app/uploads jomardev25/nodejs-api:1.0.0
 # Docker host folder path
 /var/lib/docker/volumes/nodejs-api-volume/_data
 
@@ -71,8 +89,31 @@ docker run -p 8080:8080 -e UPLOAD_PATH=/uploads --rm --name nodejs-api -v nodejs
 Amazon EBS, local, NFS - linux, SMB - Windows
 CIFS (Common Internet File System) 
 
+docker volume create --driver local --opt type=nfs --opt o=addr=<NFS ip address>,rw --opt device=:<:/NFS export path> <NFS Docker volume name>
+
 #Docker Network
 Network Driver:	bridge, host, ipvlan, macvlan, null, overlay
+
+#BRIDGE
+docker network create -d bridge --subnet 10.0.0.2/20 --gateway 10.0.0.1 custombridge
+
+#MACVLAN
+docker network create -d macvlan --subnet 172.31.80.2/20 --gateway 172.31.80.1 -o parent=eth0 macnetwork
+
+#IPVLAN
+docker network create -d ipvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o ipvlan_mode=l2 -o parent=eth0 ipvnetwork
+
+
+
+#OVERLAY
+docker network create -d overlay \
+  --subnet=192.168.10.0/25 \
+  --subnet=192.168.20.0/25 \
+  --gateway=192.168.10.100 \
+  --gateway=192.168.20.100 \
+  --aux-address="my-router=192.168.10.5" --aux-address="my-switch=192.168.10.6" \
+  --aux-address="my-printer=192.168.20.5" --aux-address="my-nas=192.168.20.6" \
+  overlaynetwork
 
 #Run an image with volume
 #Using git bash
@@ -84,8 +125,64 @@ docker run -v %cd%/uploads:/usr/app/uploads -p 8080:8080 -e UPLOAD_PATH=/uploads
 #Using Powershell
 docker run -v $pwd/uploads:/usr/app/uploads -p 8080:8080 -e UPLOAD_PATH=/uploads --rm --name nodejs-api jomardev25/nodejs-api:1.0.0
 
+#Docker Security
+docker run aquasec/trivy image <image>
+
+docker run -p 9090:80 --rm --name nginx --network host nginx
+
 # Access docker volumes folder
-\\wsl$\docker-desktop-data\mnt\wsl\docker-desktop-data\data\docker\volumes
+\\wsl.localhost\docker-desktop-data\data\docker\volumes
+
+./vendor/bin/doctrine-migrations migrate
+./vendor/bin/doctrine-migrations generate
+
+#Set Up Docker Swarm
+https://docs.docker.com/engine/swarm/swarm-mode/
+docker swarm init --advertise-addr <IP_ADDRESS>
+docker swarm join --token <TOKEN> <MANAGER_IP_ADDRESS>:<PORT>
+
+#Retrive manager token to join as manager in swarm
+docker swarm join-token manager
+
+#Retrive worker token to join as worker in swarm
+docker swarm join-token worker
+
+
+#Doker Swarm
+#Deploy Service
+docker service create --name nodejs-api-service --publish published=80,target=8080 --replicas 4 jomardev25/nodejs-api:1.0.0
+
+#Deploy Stack
+docker stack deploy --compose-file docker-stack.yml nodejs-api-service
+
+#Deploy Service to specific worker node
+docker service create --constraint 'node.hostname == worker1'
+
+#Connect the service to an overlay network
+docker network create --driver overlay nodejs-api-network
+docker service create --name nodejs-api-service --network nodejs-api-network --publish published=80,target=8080 --replicas 2 jomardev25/nodejs-api:1.0.0
+
+
+
+#List Service
+docker service ls
+
+#Inspect Service
+docker service inspect --pretty nodejs-api-service
+
+#Scale Service
+docker service scale nodejs-api-service=3
+
+#Verify Scaled Service
+docker service ps nodejs-api-service
+
+#Rolling Update
+docker service update --image jomardev25/nodejs-api:2.0.0 nodejs-api-service
+
+#Delete Service
+docker service rm nodejs-api-service
+
+
 
 
 #Kubernetes
@@ -112,7 +209,6 @@ kubectl rollout resume deployment/nodejs-api
 #Undo a previous rollout
 kubectl rollout undo deployment/nodejs-api
 
+
 # Package Java application to Jar or War file
 mvn clean package
-
-#Linux Command

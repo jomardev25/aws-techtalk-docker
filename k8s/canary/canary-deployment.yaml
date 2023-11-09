@@ -5,7 +5,7 @@ metadata:
   name: canary-nodejs-api
   namespace: default
 spec:
-  replicas: 10
+  replicas: 2 # to make the traffic 50% make this 10
   selector:
     matchLabels:
       app: nodejs-api

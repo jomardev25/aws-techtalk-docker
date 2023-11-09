@@ -10,7 +10,7 @@ spring:
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -28,7 +28,7 @@ spring:
       max-file-size: 200MB
   flyway:
     baseline-on-migrate: "true"
-    enabled: "true"
+    enabled: "false"
     user: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     baseline-description: "init"
@@ -50,6 +50,7 @@ application:
         expiration: 604800000 # 7 days
   file:
     upload-root-dir: ${UPLOAD_PATH}
+    base-url: http://localhost:8080
     upload-dir: 
       articles: ./public/uploads
       profiles: ./public/uploads/profiles

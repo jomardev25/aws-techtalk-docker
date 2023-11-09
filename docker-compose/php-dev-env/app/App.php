@@ -11,7 +11,7 @@ use Illuminate\Events\Dispatcher;
 use Twig\Loader\FilesystemLoader;
 use Illuminate\Container\Container;
 use App\Exceptions\RouteNotFoundException;
-use App\Contracts\Services\EmployeeServiceInterface as ServicesEmployeeServiceInterface;
+use App\Contracts\Services\EmployeeServiceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -54,7 +54,7 @@ class App
 
         $this->container->singleton(Environment::class, fn() => $twig);
         $this->container->singleton(Request::class, fn() => Request::createFromGlobals());
-        $this->container->singleton(ServicesEmployeeServiceInterface::class, fn() => new EmployeeService());
+        $this->container->singleton(EmployeeServiceInterface::class, fn() => new EmployeeService());
        
         return $this;
     }

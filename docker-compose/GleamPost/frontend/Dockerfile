@@ -1,4 +1,4 @@
-# First Step is to bundle the react app
+# First step is to bundle the react app
 FROM node:alpine AS builder
 WORKDIR /usr/app
 COPY ./package.json .
@@ -7,7 +7,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Second Step is to serve the static files in nginx
+# Second step is to serve the static files in nginx
 FROM nginx:1.25.2
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*

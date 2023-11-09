@@ -1,8 +1,16 @@
-version: "3.8"
+# this file is meant for Docker Swarm stacks only
+# trying it in compose will fail because of multiple replicas trying to bind to the same port
+# Swarm currently does not support Compose Spec, so we'll pin to the older version 3.9
+
+version: "3.9"
+
 services:
   api:
-    build:
-      context: .
+    image: jomardev25/nodejs-api:1.0.0
+    ports:
+      - 8080:8080
+    networks:
+      - nodjs-api-network
     deploy:
       restart_policy:
         condition: on-failure # none, on-failure, any
@@ -21,27 +29,6 @@ services:
           memory: 20M
     environment:
       - UPLOAD_PATH=/uploads
-    volumes:
-      - type: bind
-        source: ./uploads
-        target: /usr/app/uploads
-      - .:/usr/app
-      - /usr/app/node_modules
-      - /conf.d
-    networks:
-      - networks
-    command: npm run prod
-  nginx:
-    image: nginx:1.25.2
-    restart: always
-    volumes:
-      - ./conf.d:/etc/nginx/conf.d
-    depends_on:
-      - api
-    ports:
-      - 8081:8080
-    networks:
-      - networks
 
 networks:
-  networks:
+  nodjs-api-network:

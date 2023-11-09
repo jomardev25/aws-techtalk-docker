@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +38,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
+        @Value("${application.file.base-url}")
+        private String baseUrl;
         private final ArticleRepository articleRepository;
         private final TagRepository tagRepository;
         private final UserRepository userRepository;
@@ -51,35 +54,33 @@ public class ArticleServiceImpl implements ArticleService {
                 Pageable pageable = PageRequest.of(page, size, sort);
                 Page<Article> articles = articleRepository.findAll(pageable);
                 List<ArticleResponseDto> content = articles.stream()
-                                .map(a -> modelMapper.map(a, ArticleResponseDto.class))
-                                .toList();
+                        .map(a -> modelMapper.map(a, ArticleResponseDto.class))
+                        .toList();
 
                 return PaginatedArticleResponseDto.builder()
-                                .pageNumber(articles.getNumber())
-                                .pageSize(articles.getSize())
-                                .totalElements(articles.getTotalElements())
-                                .totalPages(articles.getTotalPages())
-                                .first(articles.isFirst())
-                                .last(articles.isLast())
-                                .articles(content)
-                                .build();
+                        .pageNumber(articles.getNumber())
+                        .pageSize(articles.getSize())
+                        .totalElements(articles.getTotalElements())
+                        .totalPages(articles.getTotalPages())
+                        .first(articles.isFirst())
+                        .last(articles.isLast())
+                        .articles(content)
+                        .build();
         }
 
         @Override
         public List<ArticleResponseDto> getFeaturedArticles() {
                 List<Article> top6Articles = articleRepository.findFirst6ByOrderByPublishedAtDesc();
-                String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-                                .replacePath(null).replaceQuery(null).fragment(null).build().toUriString();
                 return top6Articles
-                                .stream()
-                                .map(a -> ArticleResponseDto.builder()
-                                                .id(a.getId())
-                                                .title(a.getTitle())
-                                                .body(a.getBody())
-                                                .slug(a.getSlug())
-                                                .imageUrl(baseUrl + "/uploads/" + a.getImageUrl())
-                                                .build())
-                                .toList();
+                        .stream()
+                        .map(a -> ArticleResponseDto.builder()
+                        .id(a.getId())
+                        .title(a.getTitle())
+                        .body(a.getBody())
+                        .slug(a.getSlug())
+                        .imageUrl(baseUrl + "/uploads/" + a.getImageUrl())
+                        .build())
+                        .toList();
         }
 
         @Transactional

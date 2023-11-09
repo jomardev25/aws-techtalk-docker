@@ -2,5 +2,5 @@
 while true
 do
     kubectl get pods
-    sleep 0.5
+    sleep 1
 done

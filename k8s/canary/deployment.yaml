@@ -5,7 +5,7 @@ metadata:
   name: nodejs-api
   namespace: default
 spec:
-  replicas: 0
+  replicas: 10
   selector:
     matchLabels:
       app: nodejs-api

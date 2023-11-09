@@ -64,6 +64,10 @@ CREATE TABLE IF NOT EXISTS "comment" (
 	CONSTRAINT "fkqm52p1v3o13hy268he0wcngr5" FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
+CREATE SEQUENCE IF NOT EXISTS comment_seq
+INCREMENT 1
+START 156;
+
 CREATE TABLE IF NOT EXISTS "token" (
 	"id" INTEGER NOT NULL,
 	"expired" BOOLEAN NOT NULL,
@@ -75,6 +79,10 @@ CREATE TABLE IF NOT EXISTS "token" (
 	CONSTRAINT "fkj8rfw4x0wjjyibfqq566j4qng" FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON UPDATE NO ACTION ON DELETE NO ACTION,
 	CONSTRAINT "token_token_type_check" CHECK ((((token_type)::text = 'BEARER'::text)))
 );
+
+CREATE SEQUENCE IF NOT EXISTS token_seq
+INCREMENT 1
+START 1;
 
 CREATE UNIQUE INDEX uk_pddrhgwxnms2aceeku9s2ewy5 ON token(token);
 
@@ -90,6 +98,10 @@ INSERT INTO "users" ("id", "is_account_non_expired", "is_account_non_locked", "b
 	(1, 'true', 'true', 'This is my biography', 'true', 'john@local.com', 'true', 'John', 'C:\', 'Doe', '$2a$10$TT2T4/.4wfV3XI53s5qSKerrlqJxM6hpGkz3CzWGgU2sO6r1PFAFK', 'AUTHOR', 'john'),
 	(3, 'true', 'true', 'This is my biography', 'true', 'admin@local.com', 'true', 'John', 'C:\', 'Doe', '$2a$10$XzdpqpVk.IkHF6Cj.uo3puFaP/1sXsQECXhmzOTu53hZetKNPwUqS', 'AUTHOR', 'admin');
 
+CREATE SEQUENCE IF NOT EXISTS users_seq
+INCREMENT 1
+START 4;
+
 INSERT INTO "tag" ("id", "name") VALUES
 	(102, 'Vacation'),
 	(103, 'Summer'),
@@ -97,6 +109,10 @@ INSERT INTO "tag" ("id", "name") VALUES
 	(153, 'Bonorum'),
 	(154, 'Standard'),
 	(155, 'Ipsum');
+
+CREATE SEQUENCE IF NOT EXISTS tag_seq
+INCREMENT 1
+START 156;
 	
 INSERT INTO "article" ("id", "body", "created_at", "description", "image_url", "published_at", "slug", "title", "updated_at", "author_id") VALUES
 	(152, 'All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined withAll the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with.', '2023-08-21 01:36:26.414632', 'Perfect Summer Vacation', 'perfe1.jpg', '2023-08-27 02:46:01', 'perfect-summer', 'Some Tips for Planning a Perfect Summer Vacation', '2023-08-21 01:36:26.414632', 1),
@@ -110,3 +126,8 @@ INSERT INTO "article" ("id", "body", "created_at", "description", "image_url", "
 	(452, 'Aliquam nulla facilisi cras fermentum odio eu. Amet porttitor eget dolor morbi non. Feugiat in fermentum posuere urna nec. Commodo quis imperdiet massa tincidunt. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus. A cras semper auctor neque vitae tempus quam pellentesque. Purus ut faucibus pulvinar elementum integer enim neque volutpat. Duis ultricies lacus sed turpis. Non pulvinar neque laoreet suspendisse interdum consectetur libero id. Amet consectetur adipiscing elit ut aliquam purus sit. Risus feugiat in ante metus dictum at tempor. Dictum fusce ut placerat orci nulla. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Mi bibendum neque egestas congue quisque egestas diam in.', '2023-08-27 01:46:11.116708', 'Aliquam nulla facilisi cras fermentum odio eu. Amet porttitor eget dolor morbi non. Feugiat in fermentum posuere urna nec. Commodo quis imperdiet massa tincidunt. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus.', 'perfect3.jpg', '2023-08-27 02:46:01', 'Aliquam', 'Aliquam nulla facilisi cras fermentum odio eu', '2023-08-27 01:46:11.116708', 3),
 	(453, 'Nibh cras pulvinar mattis nunc sed. Ipsum dolor sit amet consectetur adipiscing elit. Nisi quis eleifend quam adipiscing vitae proin sagittis nisl. Faucibus a pellentesque sit amet porttitor eget dolor morbi. Non nisi est sit amet facilisis magna. Arcu risus quis varius quam quisque id. Fermentum odio eu feugiat pretium nibh ipsum. Augue ut lectus arcu bibendum at varius. Ac turpis egestas maecenas pharetra convallis posuere morbi leo. Quis vel eros donec ac. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Sollicitudin aliquam ultrices sagittis orci a scelerisque purus semper. Lacus sed viverra tellus in hac habitasse platea dictumst. Vulputate ut pharetra sit amet aliquam id diam maecenas ultricies.', '2023-08-27 01:49:33.423375', 'Nibh cras pulvinar mattis nunc sed. Ipsum dolor sit amet consectetur adipiscing elit. Nisi quis eleifend quam adipiscing vitae proin sagittis nisl. Faucibus a pellentesque sit amet porttitor eget dolor morbi. Non nisi est sit amet facilisis magna.', 'perfect2.jpg', '2023-08-27 02:46:01', 'lorem-ipsum-is-pulvinar ', 'Nibh cras pulvinar mattis nunc sed. Ipsum dolor sit amet consectetur adipiscing elit', '2023-08-27 01:49:33.423375', 3),
 	(502, 'Tortor id aliquet lectus proin nibh nisl. Platea dictumst vestibulum rhoncus est. Vulputate mi sit amet mauris commodo quis imperdiet massa tincidunt. Non odio euismod lacinia at quis risus sed. Faucibus turpis in eu mi bibendum. Enim ut tellus elementum sagittis vitae et. Blandit libero volutpat sed cras ornare arcu. Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit. Interdum velit laoreet id donec ultrices tincidunt. Scelerisque eu ultrices vitae auctor eu augue ut lectus arcu. Egestas tellus rutrum tellus pellentesque. Cursus eget nunc scelerisque viverra mauris. Justo nec ultrices dui sapien eget. Ultrices sagittis orci a scelerisque purus semper eget duis. Malesuada fames ac turpis egestas maecenas. Sit amet mauris commodo quis imperdiet massa tincidunt nunc. Vulputate eu scelerisque felis imperdiet proin. Pellentesque nec nam aliquam sem. Eget felis eget nunc lobortis. Massa tempor nec feugiat nisl pretium fusce id velit.', '2023-08-27 01:55:44.786843', 'Tortor id aliquet lectus proin nibh nisl. Platea dictumst vestibulum rhoncus est. Vulputate mi sit amet mauris commodo quis imperdiet massa tincidunt. Non odio euismod lacinia at quis risus sed.n eu mi bibendum. Enim ut tellus elementum sagittis vitae et. Blandit libero volutpat sed cras ornare arcu. Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.', 'perfect4.png', '2023-08-27 02:46:01', 'tortor- id-aliquet', 'Tortor id aliquet lectus proin nibh nisl.', '2023-08-27 01:55:44.786843', 3);
+
+
+CREATE SEQUENCE IF NOT EXISTS article_seq
+INCREMENT 1
+START 503;
