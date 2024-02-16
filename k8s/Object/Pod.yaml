@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: nodejs-api
+  namespace: default
+spec:
+  containers:
+    - name: nodejs-api
+      image: jomardev25/nodejs-api:2.0.0
+      ports:
+        - containerPort: 8080

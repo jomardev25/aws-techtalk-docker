@@ -1,0 +1,7 @@
+apiVersion: apps/v1
+kind: ConfigMap
+metadata:
+  name: nodejs-api-configmap
+data:
+  ENV: development
+  URL: http://fake.com

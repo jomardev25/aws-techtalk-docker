@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: nodejs-api
+  labels:
+    app: nodejs-api
+spec:
+  ports:
+    - port: 8080
+      name: nodejs-api
+  clusterIP: None
+  selector:
+    app: nodejs-api
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nodejs-api
+spec:
+  selector:
+    matchLabels:
+      app: nodejs-api # has to match .spec.template.metadata.labels
+  serviceName: "nodejs-api"
+  replicas: 3 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: nodejs-api # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: nodejs-api
+          image: jomardev25/nodejs-api:1.0.0
+          ports:
+            - containerPort: 8080
+              name: nodejs-api
+          volumeMounts:
+            - name: uploads
+              mountPath: /usr/app/uploads
+  volumeClaimTemplates:
+    - metadata:
+        name: uploads
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "my-storage-class"
+        resources:
+          requests:
+            storage: 1Gi

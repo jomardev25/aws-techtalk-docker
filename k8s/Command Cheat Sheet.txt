@@ -1,0 +1,74 @@
+#Kubernetes
+kubectl describe node
+
+#Get endpoints
+kubectl get endpoints
+
+#Port Forwarding
+kubectl port-forward <POD>  8080:8080
+
+#Delete POD
+kubectl delete pod nodejs-api-7d8949cd46-4qp2n
+
+#Get status
+kubectl rollout status deployments
+
+#Mark the provided resource as paused
+kubectl rollout pause deployment/nodejs-api
+
+#Resume a paused resource
+kubectl rollout resume deployment/nodejs-api
+
+#Undo a previous rollout
+kubectl rollout undo deployment/nodejs-api
+
+kubectl delete all --all -n {namespace}
+kubectl get services
+kubectl get svc
+kubectl get secret
+
+https://kubernetes.io/docs/concepts/overview/
+
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-getting-started-strong-
+
+https://www.bluematador.com/learn/kubectl-cheatsheet
+
+https://kodekloud.com/blog/kubernetes-objects/
+
+https://roadmap.sh/kubernetes
+
+https://labs.play-with-docker.com
+
+https://labs.play-with-k8s.com
+
+https://roadmap.sh/kubernetes
+
+
+11 Types of Objects in Kubernetes
+Pods - Container(instance of image)
+Deployment - 
+ReplicaSets
+StatefulSet
+DaemonSets
+PersistentVolume
+Service
+Namespaces
+ConfigMaps & Secrets
+Job
+
+Types of services
+ClusterIP (default)
+NodePort
+LoadBalancer
+ExternalName
+
+Kubectl 
+- is a command line tool used to run commands against Kubernetes clusters.
+  It does this by authenticating with the Master Node of your cluster and making API calls to do a variety of management actions.
+
+
+ClusterIP service
+- creates a connector for in-node communication. Use it only in case you have a specific application that needs to connect with others in your node.
+
+NodePort and LoadBalancer
+- Used for external access to your applications

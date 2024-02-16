@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: nodejs-api
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
       port: 8080
